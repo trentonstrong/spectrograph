@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/aristo.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}" />
+</head>
+<body>
+    <div id="app" class="container">
+        <div class="tabs">
+            <ul>
+                <li><a href="#signalTransformTab">Input Signal Frequency Spectrum</a></li>
+            </ul>
+            <div id="signalTransformTab" class="signal-transform"></div>
+        </div>
+        <div>
+            <img src="img/social_icons_png/orange_white_64.png" />
+            <input  id="scSearchQuery" type="text" name="q" placeholder="Search SoundCloud" />
+            <button id="scSearchBtn" class="btn btn-primary">Search</button>
+            <ul id="scSearchResults"></ul>
+        </div>
+    </div>
+</body>
+</html>
+
+<script id="scSearchResultsTemplate" type="text/x-underscore-template">
+    <% _.each(tracks, function(track) { %>
+        <li><a href="<%= track.permalink_url %>" class="sc-track-link" data-stream_url="<%= track.stream_url %>"><%= track.title %></a></li>
+    <% }); %>
+</script>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="{{ url_for('static', filename='js/jquery-1.7.1.min.js') }}"><\/script>')</script>
+<script src="{{ url_for('static', filename='js/jquery-ui-1.8.18.custom.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/underscore.js') }}"></script>
+<script src="{{ url_for('static', filename='js/backbone.js') }}"></script>
+<script src="{{ url_for('static', filename='js/d3.js') }}"></script>
+<script src="{{ url_for('static', filename='js/dsp.js') }}"></script>
+<script src="{{ url_for('static', filename='js/mathextras.js') }}"></script>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+<script src="http://connect.soundcloud.com/sdk.js"></script>
+<script>
+SC.initialize({
+  client_id: '2e38ec77fb4b9a5850327972a4f4992c'
+});
+</script>
+<script>
+    var appView = new SCS.ApplicationView({
+        el: $('#app'),
+        width: 1200
+    });
+</script>

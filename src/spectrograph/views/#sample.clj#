@@ -1,0 +1,6 @@
+(ns spectrograp.views.sample
+  (:use noir-async.core))
+
+(defpage-async "/sample" [] conn
+  (async-push conn {:status 200 :chunked true})
+  )

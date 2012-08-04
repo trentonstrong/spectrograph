@@ -1,0 +1,4 @@
+(ns spectrograph.views.welcome
+  (:use [noir.core :only [defpage]]))
+
+
